@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pesa Grow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pesa Grow Investment</h1>
+        <input type="text" id="phone" placeholder="Enter Phone (2547XXXXXXXX)">
+        <input type="number" id="amount" placeholder="Amount">
+        <button onclick="pay()">Pay Now</button>
+        <p id="response"></p>
+    </div>
+
+    <footer>
+        <p>Support: mwebidouglas08@gmail.com</p>
+    </footer>
+
+<script>
+async function pay() {
+    const phone = document.getElementById("phone").value;
+    const amount = document.getElementById("amount").value;
+
+    const res = await fetch("http://localhost:5000/stkpush", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, amount })
+    });
+
+    const data = await res.json();
+    document.getElementById("response").innerText = JSON.stringify(data);
+}
+</script>
+</body>
+</html>
